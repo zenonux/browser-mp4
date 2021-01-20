@@ -1,0 +1,17 @@
+{
+  "name": "browser-mp4",
+  "version": "1.0.0",
+  "description": "",
+  "bin":"index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^7.0.0",
+    "ffmpeg": "0.0.4",
+    "readdirp": "^3.5.0"
+  }
+}

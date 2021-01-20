@@ -1,0 +1,5 @@
+node_modules/
+.DS_Store
+browser-mp4-linux
+browser-mp4-macos
+browser-mp4-win.exe
