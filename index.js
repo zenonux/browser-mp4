@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const readdirp = require("readdirp");
 const path = require("path");
 const child_process = require("child_process");
