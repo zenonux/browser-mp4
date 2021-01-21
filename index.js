@@ -1,6 +1,6 @@
-const ffmpeg = require("ffmpeg");
 const readdirp = require("readdirp");
 const path = require("path");
+const child_process = require("child_process");
 const { program } = require("commander");
 const fs = require("fs");
 
@@ -13,7 +13,7 @@ async function main() {
   const options = program.opts();
   const programInput = options.input;
 
-  const inputPath = path.resolve(process.cwd(), programInput);
+  const inputPath = path.resolve(__dirname, programInput);
 
   for await (const entry of readdirp(inputPath, { fileFilter: "*.mp4" })) {
     const { fullPath } = entry;
@@ -27,10 +27,9 @@ async function convert(inputFile) {
     return;
   }
   try {
-    let video = await ffmpeg(inputFile);
-    video.addCommand("-c:v", "libx264");
-    video.addCommand("-pix_fmt", "yuv420p");
-    await video.save(outputFile);
+    await exec(
+      `ffmpeg -i ${inputFile} -c:v libx264 -pix_fmt yuv420p ${outputFile}`
+    );
   } catch (e) {
     console.error(inputFile, ":convert fail" + e);
   }
@@ -38,4 +37,16 @@ async function convert(inputFile) {
 
 function getOutputFilePath(inputFile) {
   return inputFile.substr(0, inputFile.length - 4) + "-output.mp4";
+}
+
+function exec(str) {
+  return new Promise((resolve, reject) => {
+    child_process.exec(str, function (error, stdout) {
+      if (error !== null) {
+        console.error(error);
+        reject(error);
+      }
+      resolve(stdout);
+    });
+  });
 }
