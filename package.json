@@ -1,6 +1,6 @@
 {
   "name": "browser-mp4",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "bin":"index.js",
   "scripts": {
@@ -12,5 +12,10 @@
   "dependencies": {
     "commander": "^7.0.0",
     "readdirp": "^3.5.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zenonux/browser-mp4"
+  },
+  "homepage": "https://github.com/zenonux/browser-mp4#readme"
 }
