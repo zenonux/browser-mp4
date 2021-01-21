@@ -1,9 +1,9 @@
 #! /usr/bin/env node
 
 const readdirp = require("readdirp");
+const { program } = require("commander");
 const path = require("path");
 const child_process = require("child_process");
-const { program } = require("commander");
 const fs = require("fs");
 
 main();

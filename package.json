@@ -1,6 +1,6 @@
 {
   "name": "browser-mp4",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "bin":"index.js",
   "scripts": {
@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^7.0.0",
-    "ffmpeg": "0.0.4",
     "readdirp": "^3.5.0"
   }
 }

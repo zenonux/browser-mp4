@@ -5,3 +5,8 @@
 ## 使用方式
 
 确保安装 ffmpeg
+
+```
+npm i -g browser-mp4
+browser-mp4 -i [inputDir]
+```
