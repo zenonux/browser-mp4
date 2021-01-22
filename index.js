@@ -3,8 +3,9 @@
 const readdirp = require("readdirp");
 const { program } = require("commander");
 const path = require("path");
-const child_process = require("child_process");
 const fs = require("fs");
+const { promisify } = require("util");
+const exec = promisify(require("child_process").exec);
 
 main();
 
@@ -39,16 +40,4 @@ async function convert(inputFile) {
 
 function getOutputFilePath(inputFile) {
   return inputFile.substr(0, inputFile.length - 4) + "-output.mp4";
-}
-
-function exec(str) {
-  return new Promise((resolve, reject) => {
-    child_process.exec(str, function (error, stdout) {
-      if (error !== null) {
-        console.error(error);
-        reject(error);
-      }
-      resolve(stdout);
-    });
-  });
 }
