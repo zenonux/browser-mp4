@@ -18,7 +18,9 @@ async function main() {
 
   const inputPath = path.resolve(__dirname, programInput);
 
-  for await (const entry of readdirp(inputPath, { fileFilter: "*.mp4" })) {
+  for await (const entry of readdirp(inputPath, {
+    fileFilter: ["*.mp4", "*.ogv"],
+  })) {
     const { fullPath } = entry;
     await convert(fullPath);
   }
@@ -33,6 +35,7 @@ async function convert(inputFile) {
     await exec(
       `ffmpeg -i ${inputFile} -c:v libx264 -pix_fmt yuv420p ${outputFile}`
     );
+    console.log(inputFile, ":convert success");
   } catch (e) {
     console.error(inputFile, ":convert fail" + e);
   }
