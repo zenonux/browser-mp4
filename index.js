@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 
 const readdirp = require("readdirp");
 const { program } = require("commander");
@@ -19,7 +19,7 @@ async function main() {
   const inputPath = path.resolve(__dirname, programInput);
 
   for await (const entry of readdirp(inputPath, {
-    fileFilter: ["*.mp4", "*.ogv"],
+    fileFilter: ["*.mp4", "*.ogv", "*.webm"],
   })) {
     const { fullPath } = entry;
     await convert(fullPath);
@@ -28,7 +28,8 @@ async function main() {
 
 async function convert(inputFile) {
   let outputFile = getOutputFilePath(inputFile);
-  if (fs.existsSync(outputFile) || inputFile.indexOf("output") !== -1) {
+  // 已经转换的文件不再转换
+  if (inputFile.indexOf("output") !== -1 || fs.existsSync(outputFile)) {
     return;
   }
   try {
@@ -42,5 +43,5 @@ async function convert(inputFile) {
 }
 
 function getOutputFilePath(inputFile) {
-  return inputFile.substr(0, inputFile.length - 4) + "-output.mp4";
+  return inputFile + "-output.mp4";
 }
